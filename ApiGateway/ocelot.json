@@ -10,7 +10,21 @@
                 }
             ],
             "UpstreamPathTemplate": "/events",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+            "SwaggerKey": "events"
+        }
+    ],
+    "SwaggerEndPoints": [
+        {
+            "Key": "events",
+            "TransformByOcelotConfig": true,
+            "Config": [
+                {
+                    "Name": "Events API",
+                    "Version": "v1",
+                    "Url": "https://localhost:7015/swagger/v1/swagger.json"
+                }
+            ]
         }
     ],
     "GlobalConfiguration": {
