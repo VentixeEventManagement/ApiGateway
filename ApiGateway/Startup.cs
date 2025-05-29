@@ -7,7 +7,7 @@ using Ocelot.Middleware;
 using Microsoft.Extensions.Hosting;
 using MMLib.SwaggerForOcelot.Middleware;
 
-namespace ApiGatewayWithEndpointSecurity
+namespace ApiGateway
 {
     public class Startup
     {
