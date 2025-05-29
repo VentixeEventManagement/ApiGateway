@@ -1,7 +1,7 @@
 {
     "Routes": [
         {
-            "DownstreamPathTemplate": "/api/events",
+            "DownstreamPathTemplate": "/api/Event",
             "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
@@ -10,8 +10,53 @@
                 }
             ],
             "UpstreamPathTemplate": "/events",
-            "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+            "UpstreamHttpMethod": [ "GET", "POST" ],
             "SwaggerKey": "events"
+        },
+        {
+            "DownstreamPathTemplate": "/api/Event/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7015
+                }
+            ],
+            "UpstreamPathTemplate": "/events/{id}",
+            "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+            "SwaggerKey": "events"
+        },
+        {
+            "DownstreamPathTemplate": "/api/Token",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7150
+                }
+            ],
+            "UpstreamPathTemplate": "/auth/token",
+            "UpstreamHttpMethod": [ "POST" ],
+            "SwaggerKey": "auth",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "ApiKey"
+            },
+            "DelegatingHandlers": [
+                "ApiKeyHandler"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/swagger/{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7150
+                }
+            ],
+            "UpstreamPathTemplate": "/auth-swagger/{everything}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "SwaggerKey": "auth"
         }
     ],
     "SwaggerEndPoints": [
@@ -20,14 +65,35 @@
             "TransformByOcelotConfig": true,
             "Config": [
                 {
-                    "Name": "Events API",
+                    "Name": "EventProvider API",
                     "Version": "v1",
                     "Url": "https://localhost:7015/swagger/v1/swagger.json"
                 }
             ]
+        },
+        {
+            "Key": "auth",
+            "TransformByOcelotConfig": true,
+            "Config": [
+                {
+                    "Name": "JWT Auth Provider API",
+                    "Version": "v1",
+                    "Url": "https://localhost:7150/swagger/v1/swagger.json"
+                }
+            ],
+            "SecurityDefinitions": {
+                "ApiKey": {
+                    "Type": "apiKey",
+                    "Name": "X-API-KEY",
+                    "In": "header"
+                }
+            },
+            "SecurityRequirements": {
+                "ApiKey": []
+            }
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:7000"
+        "BaseUrl": "https://localhost:7180"
     }
 }
