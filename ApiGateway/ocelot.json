@@ -1,110 +1,123 @@
 {
     "Routes": [
         {
-            "DownstreamPathTemplate": "/api/{everything}",
-            "DownstreamScheme": "http",
+            "DownstreamPathTemplate": "/api/gateway/public-health",
+            "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5100
+                    "Port": 54311
                 }
             ],
-            "UpstreamPathTemplate": "/api/contacts/{everything}",
+            "UpstreamPathTemplate": "/api/public/health",
             "UpstreamHttpMethod": [ "Get" ],
-            "SwaggerKey": "contacts"
+            "SwaggerKey": "gateway"
         },
         {
             "DownstreamPathTemplate": "/api/{everything}",
-            "DownstreamScheme": "http",
+            "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5200
+                    "Port": 7150
                 }
             ],
-            "UpstreamPathTemplate": "/api/projects/{everything}",
-            "SwaggerKey": "projects"
-        },
-        {
-            "DownstreamPathTemplate": "/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 5300
-                }
-            ],
-            "UpstreamHttpMethod": [ "Get", "Post" ],
-            "UpstreamPathTemplate": "/api/pets/{everything}",
-            "SwaggerKey": "pets"
+            "UpstreamPathTemplate": "/api/token/{everything}",
+            "UpstreamHttpMethod": [ "Post" ],
+            "SwaggerKey": "jwtauth"
         },
         {
             "DownstreamPathTemplate": "/api/{everything}",
-            "DownstreamScheme": "http",
+            "DownstreamScheme": "https",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "localhost",
-                    "Port": 5400
+                    "Port": 7022
                 }
             ],
-            "UpstreamPathTemplate": "/api/orders/{everything}",
-            "UpstreamHttpMethod": [],
-            "SwaggerKey": "orders"
+            "UpstreamPathTemplate": "/api/tickets/{everything}",
+            "SwaggerKey": "tickets",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7015
+                }
+            ],
+            "UpstreamPathTemplate": "/api/events/{everything}",
+            "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+            "SwaggerKey": "events",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 54311
+                }
+            ],
+            "UpstreamPathTemplate": "/api/{everything}",
+            "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+            "SwaggerKey": "gateway",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            },
+            "UpstreamHeaderTransform": {
+                "Authorization": "{Request.Headers.Authorization}"
+            }
         }
     ],
     "SwaggerEndPoints": [
         {
-            "Key": "contacts",
+            "Key": "gateway",
             "Config": [
                 {
-                    "Name": "Contacts API",
+                    "Name": "Gateway API",
                     "Version": "v1",
-                    "Url": "http://localhost:5000/swagger/v1/swagger.json"
+                    "Url": "https://localhost:54311/swagger/v1/swagger.json"
                 }
             ]
         },
         {
-            "Key": "projects",
+            "Key": "jwtauth",
             "Config": [
                 {
-                    "Name": "Projects API",
+                    "Name": "JWT Auth API",
                     "Version": "v1",
-                    "Url": "http://localhost:5200/swagger/v1/swagger.json"
+                    "Url": "https://localhost:7150/swagger/v1/swagger.json"
                 }
             ]
         },
         {
-            "Key": "pets",
+            "Key": "tickets",
             "Config": [
                 {
-                    "Name": "Pets API",
+                    "Name": "Tickets API",
                     "Version": "v1",
-                    "Url": "http://localhost:5300/swagger.json"
+                    "Url": "https://localhost:7022/swagger/v1/swagger.json"
                 }
             ]
         },
         {
-            "Key": "orders",
+            "Key": "events",
             "Config": [
                 {
-                    "Name": "Orders API",
-                    "Version": "v0.9",
-                    "Url": "http://localhost:5400/swagger/v0.9/swagger.json"
-                },
-                {
-                    "Name": "Orders API",
+                    "Name": "Events API",
                     "Version": "v1",
-                    "Url": "http://localhost:5400/swagger/v1/swagger.json"
-                },
-                {
-                    "Name": "Orders API",
-                    "Version": "v2",
-                    "Url": "http://localhost:5400/swagger/v2/swagger.json"
-                },
-                {
-                    "Name": "Orders API",
-                    "Version": "v3",
-                    "Url": "http://localhost:5400/swagger/v3/swagger.json"
+                    "Url": "https://localhost:7015/swagger/v1/swagger.json"
                 }
             ]
         }

@@ -6,6 +6,8 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Microsoft.Extensions.Hosting;
 using MMLib.SwaggerForOcelot.Middleware;
+using Microsoft.OpenApi.Models;
+using ApiGateway.Security;
 
 namespace ApiGateway
 {
@@ -21,6 +23,20 @@ namespace ApiGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
+            services.AddJwtAuthentication(Configuration);
+
+            // Add Swagger with JWT configuration
+            services.AddJwtSwaggerSecurityConfiguration();
+
+            // Add Swagger for your own API
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.5", new OpenApiInfo { Title = "Gateway API", Version = "v1" });
+            });
+
+
             services.AddOcelot();
             services.AddSwaggerForOcelot(Configuration);
 
@@ -34,7 +50,24 @@ namespace ApiGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseStaticFiles();
+            app.UseRouting();
+
+            // Authentication and authorization middleware
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            // Swagger middleware
+            app.UseSwagger();
+
+            // API Gateway endpoints
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            // Ocelot and Swagger UI
             app.UseSwaggerForOcelotUI(opt =>
             {
                 opt.DownstreamSwaggerEndPointBasePath = "/gateway/swagger/docs";

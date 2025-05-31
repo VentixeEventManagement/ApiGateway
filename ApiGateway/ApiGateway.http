@@ -1,0 +1,25 @@
+### 1. Public Health Check (no auth required)
+GET https://localhost:54311/api/public/health
+Accept: text/plain
+
+###
+
+### 2. Get JWT Token (capture token)
+POST https://localhost:54311/api/token/Token
+Content-Type: application/json
+Accept: application/json
+X-API-KEY: 34023b33-ab56-4925-add5-03666cf294a3
+
+{
+  "userId": "user1",
+  "isAdmin": true
+}
+
+###
+
+### 3. Protected Health Check (requires Bearer token)
+GET https://localhost:54311/api/gateway/health
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMSIsImp0aSI6IjYxYTdkZTNkLWE5MWQtNDUyYy04MGNkLWFmMmM1MjViMTY3YyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNzQ4NzAzMDMzLCJpc3MiOiJNaWNyb3NlcnZpY2VzQXBpR2F0ZXdheSIsImF1ZCI6IkF1dGhvcml6ZWRDbGllbnRzIn0.ba94oKXsnCHk2ZEirTvMUSn0BLErEHMv11NC_rfh4MU
+Accept: application/json
+
+###
