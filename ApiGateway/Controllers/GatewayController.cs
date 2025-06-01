@@ -7,7 +7,7 @@ namespace ApiGateway.Controllers
 {
     [Route("api/gateway")]
     [ApiController]
-    [Authorize(Roles = "Admin")]  // Restrict to Admin role only
+    [Authorize(Roles = "Admin")]  
     public class GatewayController : ControllerBase
     {
         [HttpGet("health")]
@@ -16,9 +16,8 @@ namespace ApiGateway.Controllers
             return Ok(true);
         }
 
-        // In GatewayController.cs
         [HttpGet("public-health")]
-        [AllowAnonymous]  // This endpoint doesn't require authentication
+        [AllowAnonymous] 
         public ActionResult<string> PublicHealth()
         {
             return Ok("Gateway API is working - no authentication required");

@@ -40,7 +40,7 @@ namespace ApiGateway.Security
                     RoleClaimType = ClaimTypes.Role
                 };
 
-                // Enhanced debugging and token handling
+          
                 options.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>
@@ -53,7 +53,7 @@ namespace ApiGateway.Security
                         var authHeader = context.Request.Headers["Authorization"].ToString();
                         Console.WriteLine($"Authorization header: {authHeader}");
 
-                        // Handle potential "Bearer Bearer token" case from Swagger UI
+                       
                         if (authHeader.StartsWith("Bearer Bearer "))
                         {
                             var correctedHeader = authHeader.Replace("Bearer Bearer ", "Bearer ");
@@ -66,14 +66,14 @@ namespace ApiGateway.Security
                 };
             });
 
-            // Add authorization policies based on claims
+           
             services.AddAuthorization(options =>
             {
-                // Policy to require Admin role
+                
                 options.AddPolicy("RequireAdminRole", policy =>
                     policy.RequireRole("Admin"));
 
-                // Policy for any authenticated user
+            
                 options.AddPolicy("AuthenticatedUser", policy =>
                     policy.RequireAuthenticatedUser());
             });
