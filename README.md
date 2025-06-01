@@ -11,7 +11,7 @@ It routes and secures API requests, providing a unified entry point for downstre
 
 ```mermaid
 flowchart TD
-    JwtAuthProvider([Start]) --> CheckAPIKey{Is API Key valid?}
+    Start([Start]) --> JwtAuthProvider{Is API Key valid?}
     CheckAPIKey -- No --> Reject1[Reject Request]
     CheckAPIKey -- Yes --> GenerateJWT[Generate JWT Token]
     GenerateJWT --> UseJWT[User calls API Gateway with JWT]
