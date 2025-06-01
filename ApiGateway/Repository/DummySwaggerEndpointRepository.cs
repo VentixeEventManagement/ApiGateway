@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// This document was formatted and refined by AI, also copied base from demo Repo for MMLIB SwaggerForOcelot cause i couldnt get it to work on my own
+using System.Collections.Generic;
 using ApiGateway.Repository;
 using MMLib.SwaggerForOcelot.Configuration;
 
