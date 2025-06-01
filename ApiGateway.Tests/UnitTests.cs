@@ -63,7 +63,7 @@ namespace ApiGateway.Tests
             var methodInfo = typeof(GatewayController).GetMethod("Health");
 
             // Act
-            var attributes = methodInfo.GetCustomAttributes(typeof(AuthorizeAttribute), true);
+            var attributes = methodInfo!.GetCustomAttributes(typeof(AuthorizeAttribute), true);
 
             // Assert
             // The method doesn't have its own Authorize attribute because it inherits from the controller
@@ -77,7 +77,7 @@ namespace ApiGateway.Tests
             var methodInfo = typeof(GatewayController).GetMethod("PublicHealth");
 
             // Act
-            var attributes = methodInfo.GetCustomAttributes(typeof(AllowAnonymousAttribute), true);
+            var attributes = methodInfo!.GetCustomAttributes(typeof(AllowAnonymousAttribute), true);
 
             // Assert
             Assert.Single(attributes);
@@ -105,7 +105,7 @@ namespace ApiGateway.Tests
             var methodInfo = typeof(GatewayController).GetMethod("Health");
 
             // Act
-            var attributes = methodInfo.GetCustomAttributes(typeof(HttpGetAttribute), true);
+            var attributes = methodInfo!.GetCustomAttributes(typeof(HttpGetAttribute), true);
 
             // Assert
             var httpGetAttr = Assert.Single(attributes) as HttpGetAttribute;
@@ -120,7 +120,7 @@ namespace ApiGateway.Tests
             var methodInfo = typeof(GatewayController).GetMethod("PublicHealth");
 
             // Act
-            var attributes = methodInfo.GetCustomAttributes(typeof(HttpGetAttribute), true);
+            var attributes = methodInfo!.GetCustomAttributes(typeof(HttpGetAttribute), true);
 
             // Assert
             var httpGetAttr = Assert.Single(attributes) as HttpGetAttribute;

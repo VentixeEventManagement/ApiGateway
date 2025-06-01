@@ -31,11 +31,7 @@ namespace ApiGateway
             
             services.AddJwtSwaggerSecurityConfiguration();
 
-       
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1.5", new OpenApiInfo { Title = "Gateway API", Version = "v1" });
-            });
+
 
 
             services.AddOcelot();
