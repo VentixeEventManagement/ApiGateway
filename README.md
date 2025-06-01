@@ -13,10 +13,12 @@ It routes and secures API requests, providing a unified entry point for downstre
 flowchart TD
     Start([Start]) --> CheckAPIKey{Is API Key valid?}
     CheckAPIKey -- No --> Reject1[Reject Request]
-    CheckAPIKey -- Yes --> CheckJWT{Is JWT valid?}
+    CheckAPIKey -- Yes --> GenerateJWT[Generate JWT Token]
+    GenerateJWT --> UseJWT[User calls API Gateway with JWT]
+    UseJWT --> CheckJWT{Is JWT valid?}
     CheckJWT -- No --> Reject2[Reject Request]
-    CheckJWT -- Yes --> Gateway[Forward to API Gateway]
-    Gateway --> End([End])
+    CheckJWT -- Yes --> RouteMicroservice[Route to Microservice]
+    RouteMicroservice --> End([End])
 ```
 
 ---
