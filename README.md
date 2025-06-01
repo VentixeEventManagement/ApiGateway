@@ -3,6 +3,12 @@
 ApiGateway is a **.NET 8** project that serves as an API Gateway using [Ocelot](https://ocelot.readthedocs.io/), with integrated **JWT authentication** and **Swagger documentation aggregation**.  
 It routes and secures API requests, providing a unified entry point for downstream services and aggregates Swagger endpoints for easier API exploration.
 
+## ⚡ To access this gateway:
+1. Get the Static Api Key from the Frontend
+2. Use the Api Key https://github.com/VentixeEventManagement/JwtAuthProvider on the JWT Token Provider to get a JWT Token
+3. Use that Token in swagger by pasting in just the token value or as a header with the Bearer Prefix
+4. The other microservices are avaliable to be access directly though in the future should be isolated on a private network(azure) and only allow access from the gateway endpoint.
+
 ---
 
 ## ✨ Features
