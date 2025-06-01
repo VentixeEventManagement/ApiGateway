@@ -9,6 +9,16 @@ It routes and secures API requests, providing a unified entry point for downstre
 3. Use that Token in swagger by pasting in just the token value or as a header with the Bearer Prefix
 4. The other microservices are avaliable to be access directly though in the future should be isolated on a private network(azure) and only allow access from the gateway endpoint.
 
+```mermaid
+flowchart TD
+    Start([Start]) --> CheckAPIKey{Is API Key valid?}
+    CheckAPIKey -- No --> Reject1[Reject Request]
+    CheckAPIKey -- Yes --> CheckJWT{Is JWT valid?}
+    CheckJWT -- No --> Reject2[Reject Request]
+    CheckJWT -- Yes --> Gateway[Forward to API Gateway]
+    Gateway --> End([End])
+```
+
 ---
 
 ## ✨ Features
